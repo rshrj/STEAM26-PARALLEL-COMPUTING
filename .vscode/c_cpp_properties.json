@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "GCC 16",
+            "compilerPath": "/opt/homebrew/bin/gcc-16",
+            "cStandard": "c17",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "gcc-arm64"
+        }
+    ],
+    "version": 4
+}
