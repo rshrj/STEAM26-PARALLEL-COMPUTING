@@ -1,0 +1,16 @@
+# Makefile definitions for the Matmul_recur challenge.
+# This directory mixes C and C++ sources (matmul_recur.cpp, matmul_stras.cpp),
+# so it uses the C++ compiler/linker.  On the academy laptops (AlmaLinux 9)
+# the system g++ works out of the box; "module load gcc/16.1.0" gives a newer one.
+
+CC          = g++
+CLINKER     = $(CC)
+OPTFLAGS    = -fopenmp -O3
+LIBS        = -lm
+PRE         = ./
+
+CFLAGS	  = $(OPTFLAGS)
+
+OBJ=o
+EXE=
+RM=rm
