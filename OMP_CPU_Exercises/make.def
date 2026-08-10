@@ -1,15 +1,16 @@
 # Makefile definitions.  Comment out the one
 # you wish to use:
 
-# gcc-9 for Linux or Apple (note on Apple .. the gcc you get by default 
-# connects to their clang compiler which does not include OpenMP
-CC          = gcc-15
+# gnu compiler for Linux (default on the academy laptops / lxplus, AlmaLinux 9).
+# The system "gcc" already includes OpenMP; "module load gcc/16.1.0" gives a newer one.
+CC          = gcc
 
 # Intel Compiler
 #CC          = icc
 
-# gcc for Linux systems
-#CC          = gcc
+# On a Mac the default "gcc" is Apple clang, which has OpenMP removed. Install a
+# real gnu compiler (e.g. via homebrew) and use its versioned name, e.g.:
+#CC          = gcc-15
 
 # These definitions should work on any system
 CLINKER     = $(CC)
