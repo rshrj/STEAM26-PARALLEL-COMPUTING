@@ -22,7 +22,6 @@ static long num_steps = 100000000;
 double step;
 int main ()
 {
-	  // int i;
 	  double pi, globalSum = 0.0;
 	  double start_time, run_time;
 
@@ -37,10 +36,13 @@ int main ()
 		#pragma omp parallel
 		{
 			int idthread = omp_get_thread_num();
-			nthreads = omp_get_num_threads();
+			int num_threads = omp_get_num_threads();
 			double sum = 0.0;
 
-			for (int i = idthread; i < num_steps; i = i + nthreads) {
+			// If not on x86
+			if (idthread == 0) nthreads = num_threads;
+
+			for (int i = idthread; i < num_steps; i = i + num_threads) {
 				double x = (i-0.5)*step;
 				sum = sum + 4.0/(1.0+x*x);
 			}
