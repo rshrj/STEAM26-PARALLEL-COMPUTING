@@ -6,6 +6,13 @@
             "cStandard": "c17",
             "cppStandard": "c++23",
             "intelliSenseMode": "gcc-arm64"
+        },
+        {
+            "name": "AlmaLinux GCC 16.1",
+            "compilerPath": "/cvmfs/sft.cern.ch/lcg/releases/gcc/16.1.0-43042/x86_64-el9/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "gcc-x64"
         }
     ],
     "version": 4
