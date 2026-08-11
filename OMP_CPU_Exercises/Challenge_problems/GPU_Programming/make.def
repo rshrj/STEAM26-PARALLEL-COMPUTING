@@ -1,8 +1,8 @@
-# for g++ compiler on Apple OS-X
+# for the gnu compiler on Linux (academy laptops / lxplus)
 # copy to make.def
-CC          = g++-9
+CC          = gcc
 CLINKER     = $(CC)
-OPTFLAGS    = -fopenmp -DAPPLE -O3
+OPTFLAGS    = -fopenmp -O3
 LIBS        = -lm
 PRE         = ./
 

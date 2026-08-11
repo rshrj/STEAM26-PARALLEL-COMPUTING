@@ -1,5 +1,5 @@
 # 
-include ../../make.def
+include make.def
 
 EXES= matmul_stras$(EXE)  matmul$(EXE) matmul_recur$(EXE) 
 

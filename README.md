@@ -49,17 +49,38 @@ If you want to experiment with GPU programming, Nvidia support for OpenMP is
 excellent.  You need to load, however, their HCP toolkit in order to 
 access their OpenMP (and OpenACC) compilers.
 
+### Building on the academy laptops (AlmaLinux 9)
+
+The laptops already have a gnu compiler with OpenMP, so nothing extra is needed:
 
 ```sh
-# make a compiler available (e.g. a CERN LCG build via environment modules)
-module load <compiler>
-
 # get the code
 git clone https://github.com/CERN-STEAM-Academy/26-PARALLEL-COMPUTING.git
-cd 26-PARALLEL-COMPUTING
+cd 26-PARALLEL-COMPUTING/OMP_CPU_Exercises
 
-# configure / build / run
+# build every exercise, then build-and-run the default test cases
+make
+make test
 ```
+
+The build settings live in `make.def`; by default it uses the system `gcc`
+(`-std=c11 -fopenmp -O3`). If you would rather use a newer compiler from CVMFS,
+load it first and the same commands work:
+
+```sh
+module load gcc/16.1.0     # or:  module load clang/22.1.5
+```
+
+You can also override the compiler for a single build without editing anything:
+
+```sh
+make CC=clang CLINKER=clang test
+```
+
+The `Solutions` directory and the exercises under `Challenge_problems` build the
+same way (`cd` into a directory and run `make test`). The `Matmul_recur`
+challenge contains C++ sources, so it uses `g++`; that is already configured in
+its own `make.def`.
 
 ## Materials
 

@@ -8,8 +8,9 @@ CC          = gcc-16
 # Intel Compiler
 #CC          = icc
 
-# gcc for Linux systems
-#CC          = gcc
+# On a Mac the default "gcc" is Apple clang, which has OpenMP removed. Install a
+# real gnu compiler (e.g. via homebrew) and use its versioned name, e.g.:
+#CC          = gcc-15
 
 # These definitions should work on any system
 CLINKER     = $(CC)
