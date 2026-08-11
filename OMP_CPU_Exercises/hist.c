@@ -59,7 +59,7 @@ int main ()
 
   // initialize the histogram
    for(int i=0;i<num_buckets;i++)
-     hist[i] = 0;
+     hist[i]   = 0;
 
   // Assign x values to the right historgram bucket
    time = omp_get_wtime();

@@ -3,7 +3,7 @@
 
 # gcc-9 for Linux or Apple (note on Apple .. the gcc you get by default 
 # connects to their clang compiler which does not include OpenMP
-CC          = gcc-16
+CC          = gcc
 
 # Intel Compiler
 #CC          = icc
@@ -14,7 +14,7 @@ CC          = gcc-16
 
 # These definitions should work on any system
 CLINKER     = $(CC)
-OPTFLAGS    = -std=c11 -fopenmp -O3 
+OPTFLAGS    = -std=c11 -Wall -Wextra -fopenmp -O3 
 LIBS        = -lm
 PRE         = ./
 

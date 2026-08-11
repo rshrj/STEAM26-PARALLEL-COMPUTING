@@ -75,7 +75,7 @@ struct node* init_list(struct node* p) {
     return head;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
    double start, end;
    struct node *p=NULL;
    struct node *temp=NULL;
@@ -89,10 +89,25 @@ int main(int argc, char *argv[]) {
    head = p;
 
    // traverse the list process work for each node
+   printf("Max threads: %d\n", omp_get_max_threads());
    start = omp_get_wtime();
-   while (p != NULL) {
-      processwork(p);
-      p = p->next;
+   #pragma omp parallel 
+   {
+      #pragma omp single 
+      {
+         printf("Number of threads: %d\n", omp_get_num_threads());
+      }
+      #pragma omp single
+      {
+         struct node *q = head;
+         while (q != NULL) {
+            #pragma omp task firstprivate(q)
+            {
+               processwork(q);
+            }
+            q = q->next;
+         }
+      }
    }
    end = omp_get_wtime();
 
