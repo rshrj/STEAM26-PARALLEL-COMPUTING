@@ -35,13 +35,19 @@ History:
 static long xlow        = 0.0;     // low end of x range
 static long xhi         = 100.0;   // High end of x range
 
+#define DEBUG 1
+
 int main ()
 {
 
    double x[num_trials];     // array used to assign counters in the historgram 
-   long   hist[num_buckets]; // the histogram
+   long   hist[4][num_buckets]; // the histogram
    double bucket_width;      // the width of each bucket in the histogram
    double time;
+
+   omp_lock_t hist_lock[num_buckets];
+   
+   for (int i = 0; i < num_buckets; ++i) omp_init_lock(&hist_lock[i]);
 
 
    seed(xlow, xhi);  // seed the random number generator over range of x
@@ -57,11 +63,15 @@ int main ()
 
   // Assign x values to the right historgram bucket
    time = omp_get_wtime();
+
+   #pragma omp parallel for private(hist)
    for(int i=0;i<num_trials;i++){
      
       long ival = (long) (x[i] - xlow)/bucket_width;
-
-      hist[ival]++;  
+      int thread_num = omp_get_thread_num();
+      // omp_set_lock(&hist_lock[ival]);
+      hist[thread_num][ival]++;  
+      // omp_unset_lock(&hist_lock[ival]);
 
       #ifdef DEBUG
       printf("i = %d,  xi = %f, ival = %d\n",i,(float)x[i], ival);
@@ -84,6 +94,8 @@ int main ()
    printf(" histogram for %d buckets of %d values\n",num_buckets, num_trials);
    printf(" ave = %f, std_dev = %f\n",(float)ave, (float)std_dev);
    printf(" in %f seconds\n",(float)time);
+
+   for (int i = 0; i < num_buckets; ++i) omp_destroy_lock(&hist_lock[i]);
 
    return 0;
 }
